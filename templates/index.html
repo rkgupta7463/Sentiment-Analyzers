@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sentiment Analysis For Tweets</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/sentiment-icon-13.png') }}" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex" href="/">
+                <img width=50 height=42 src="{{ url_for('static', filename='img/sentiment-icon-13.png') }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <p class="mt-2">Sentiment Analysis</p>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center">Sentiment Analysis For Tweets</h1>
+        <div class="container">
+            <form action="/" method="post">
+                <div class="form-floating">
+                    <textarea class="form-control" id="tweets" name="tweets" style="height: 150px"></textarea>
+                    <label for="tweets">Comments or Tweets</label>
+                </div>
+                <button type="submit" class="btn btn-primary my-2">Analyze</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="text-center">
+            {% if result %}
+            <h2>Analysis Result:</h2>
+            <p>The sentiment of the input text is <strong>{{ result }}</strong>.</p>
+            {% elif model_error_message %}
+            <h2>Analysis Result:</h2>
+            <p>Model Error:- <strong>{{ result }}</strong>.</p>
+            {% elif cv_error_message %}
+            <h2>Analysis Result:</h2>
+            <p>Counter Vectors Error:- <strong>{{ result }}</strong>.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
